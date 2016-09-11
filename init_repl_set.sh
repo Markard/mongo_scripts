@@ -28,9 +28,9 @@ sudo su -s /bin/bash -c "mongod --logpath /data/mongo/logs/$REPLICA-1.log --fork
 sudo su -s /bin/bash -c "mongod --logpath /data/mongo/logs/$REPLICA-2.log --fork --dbpath /data/mongo/data/$REPLICA-2/ --port 27018 --replSet $REPLICA" mongodb
 sudo su -s /bin/bash -c "mongod --logpath /data/mongo/logs/$REPLICA-3.log --fork --dbpath /data/mongo/data/$REPLICA-3/ --port 27019 --replSet $REPLICA" mongodb
 
-mongo --port 27017 << 'EOF'
+mongo --port 27017 <<EOF
 config = {
-	"_id": "m101",
+	"_id": "$REPLICA",
 	"members": [
 		{"_id": 1, "host": "127.0.0.1:27017"},
 		{"_id": 2, "host": "127.0.0.1:27018"},
