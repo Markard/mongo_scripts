@@ -17,16 +17,16 @@ echo "Creating folders for data and log."
 sudo mkdir -p /data/mongo/data/ /data/mongo/logs/
 
 # Creating folders for replica set
-sudo mkdir -p /data/mongo/data/$REPLICA-1/ /data/mongo/data/$REPLICA-2/ /data/mongo/data/$REPLICA-3/
-sudo touch /data/mongo/logs/$REPLICA-1.log /data/mongo/logs/$REPLICA-2.log /data/mongo/logs/$REPLICA-3.log
+sudo mkdir -p /data/mongo/data/"$REPLICA"-1/ /data/mongo/data/"$REPLICA"-2/ /data/mongo/data/"$REPLICA"-3/
+sudo touch /data/mongo/logs/"$REPLICA"-1.log /data/mongo/logs/"$REPLICA"-2.log /data/mongo/logs/"$REPLICA"-3.log
 
 # Setup owners
 sudo chown -R mongodb:mongodb /data/mongo
 
 echo "Starting processes."
-sudo su -s /bin/bash -c "mongod --logpath /data/mongo/logs/$REPLICA-1.log --fork --dbpath /data/mongo/data/$REPLICA-1/ --port 27017 --replSet $REPLICA" mongodb
-sudo su -s /bin/bash -c "mongod --logpath /data/mongo/logs/$REPLICA-2.log --fork --dbpath /data/mongo/data/$REPLICA-2/ --port 27018 --replSet $REPLICA" mongodb
-sudo su -s /bin/bash -c "mongod --logpath /data/mongo/logs/$REPLICA-3.log --fork --dbpath /data/mongo/data/$REPLICA-3/ --port 27019 --replSet $REPLICA" mongodb
+sudo su -s /bin/bash -c "mongod --logpath /data/mongo/logs/"$REPLICA"-1.log --fork --dbpath /data/mongo/data/"$REPLICA"-1/ --port 27017 --replSet "$REPLICA mongodb
+sudo su -s /bin/bash -c "mongod --logpath /data/mongo/logs/"$REPLICA"-2.log --fork --dbpath /data/mongo/data/"$REPLICA"-2/ --port 27018 --replSet "$REPLICA mongodb
+sudo su -s /bin/bash -c "mongod --logpath /data/mongo/logs/"$REPLICA"-3.log --fork --dbpath /data/mongo/data/"$REPLICA"-3/ --port 27019 --replSet "$REPLICA mongodb
 
 mongo --port 27017 <<EOF
 config = {
