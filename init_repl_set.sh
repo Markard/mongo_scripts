@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REPLICA='m101'
+REPLICA='rs'
 
 # Cleaning everything
 echo "Cleaning old mongo processes and data."
